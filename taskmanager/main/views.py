@@ -4,7 +4,10 @@ from .models import Photos
 
 
 def index(request):
-    return render(request, 'main/index.html')
+    all_photos = Photos.objects.all()
+    context = {'all_photos': all_photos}
+
+    return render(request, 'main/index.html', context)
 
 
 def about(request):
