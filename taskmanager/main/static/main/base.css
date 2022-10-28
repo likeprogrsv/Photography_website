@@ -1,0 +1,21 @@
+.container{
+  max-width: 960px;
+}
+
+.site-header {
+  background-color: rgba(240, 240, 240, 0.85);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+}
+.site-header a {
+  color: rgb(105, 105, 105);
+  transition: color .15s ease-in-out;
+}
+.site-header a:hover{
+  color: black;
+  
+}
+.py-2{
+  padding-top: .5rem!important;
+  padding-bottom: .5rem!important;
+}
