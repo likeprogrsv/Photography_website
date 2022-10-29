@@ -12,9 +12,41 @@
 
     <style>
         .card-img-top{
-        max-height: 220px;
-        min-height: 150px;
-        object-fit: cover;
+            max-height: 220px;
+            min-height: 150px;
+            object-fit: cover;
+        }
+        .img-text-container {
+          position: relative;
+        }
+        .inner {
+          position: absolute;
+          top: 100%;
+          transform: translate(0%, -60%);
+          color: #fff;
+          padding: 30px;
+        }
+        .card-img-wrap {
+          overflow: hidden;
+          position: relative;
+        }
+        .card-img-wrap:after {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0; bottom: 0;
+          background: rgba(255,255,255,0.3);
+          opacity: 0;
+          transition: opacity .25s;
+        }
+        .card-img-wrap img {
+          transition: transform .25s;
+          width: 100%;
+        }
+        .card-img-wrap:hover img {
+          transform: scale(1.2);
+        }
+        .card-img-wrap:hover:after {
+          opacity: 1;
         }
     </style>
 </head>
@@ -49,7 +81,14 @@
         {% for photo in all_photos %}
         <div class="col-md-4 mb-2">
            <div class="card rounded-0" style="width: 19rem;">
-            <img class="card-img-top rounded-0 border border-secondry" src='{{photo.image.url}}' alt="Card image cap">
+               <a href="photography/1">
+                   <div class="img-text-container card-img-wrap">
+                       <img class="card-img-top rounded-0 border border-secondry" src='{{photo.image.url}}' alt="Card image cap">
+                       <div class="text-center bg-text inner">
+                          <p>{{photo.name}} </p>
+                        </div>
+                   </div>
+               </a>
             <div class="card-body">
               <h5 class="card-title">{{photo.name}}</h5>
               <p class="card-text">{{photo.description}}</p>
@@ -61,19 +100,6 @@
       </div>
 
     </div>
-
-
-   <!-- <div class="container">
-        <table class="table table-hover">
-            <tbody>
-                {% for photo in all_photos %}
-                <tr class="row">
-                    <td class="col-md-1"> <img src="{{photo.image.url}}" style="max-width:900px"> </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div> -->
 </body>
 </html>
 
