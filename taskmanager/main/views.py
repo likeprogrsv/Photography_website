@@ -6,6 +6,7 @@ from .models import Photos
 import random
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from .forms import CustomUserCreationForm
 # from django.contrib.auth.forms import UserCreationForm
 
 num_rand_photos = 6
@@ -32,7 +33,20 @@ def logoutUser(request):
 
 def registerUser(request): 
     page = 'register'
-    form = UserCreationForm()
+    form = CustomUserCreationForm()
+
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.save()
+
+            user = authenticate(request, username=user.username, password=request.POST['password1'])
+
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+        
     context = {'form': form, 'page': page}
     return render(request, 'main/login_register.html', context)
 
