@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Register</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main/base.css' %}">    
+
+</head>
+<body>
+  <div class='container'>
+    <div class='login--wrapper'>
+
+      {% if page == 'login' %}
+
+      <form method='POST' class='form'>
+        {% csrf_token %}
+        <h1 class='mb-3'><u>Login</u></h1>
+        <h4>Login for comment and rate photos</h4>        
+          <div class="form-group mb-3">
+            <label for="exampleInputEmail1">Username</label>
+            <input type="text" class="form-control" name=username id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">          
+          </div>
+          <div class="form-group mb-3">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" name=password id="exampleInputPassword1" placeholder="Password">
+          </div>    
+          <button type='submit' class='btn btn-primary btn-dark mb-3'>Submit</button> 
+          <p>Don't have account yet? <a href="{% url 'register' %}">Register</a></p>      
+      </form>
+
+      {% else %}
+        <form method='POST' class='form'>
+          {% csrf_token %}
+          {{form}}
+          <button type='submit' class='btn btn-primary btn-dark mb-3'>Submit</button> 
+          <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+        </form>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>

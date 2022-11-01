@@ -6,58 +6,20 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}{% endblock %}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     {% load static %}
     <link rel="stylesheet" href="{% static 'main/base.css' %}">
-
-    <style>
-        .card-img-top{
-            max-height: 220px;
-            min-height: 150px;
-            object-fit: cover;
-        }
-        .img-text-container {
-          position: relative;
-        }
-        .inner {
-          position: absolute;
-          top: 100%;
-          transform: translate(0%, -60%);
-          color: #fff;
-          padding: 30px;
-        }
-        .card-img-wrap {
-          overflow: hidden;
-          position: relative;
-        }
-        .card-img-wrap:after {
-          content: '';
-          position: absolute;
-          top: 0; left: 0; right: 0; bottom: 0;
-          background: rgba(255,255,255,0.3);
-          opacity: 0;
-          transition: opacity .25s;
-        }
-        .card-img-wrap img {
-          transition: transform .25s;
-          width: 100%;
-        }
-        .card-img-wrap:hover img {
-          transform: scale(1.2);
-        }
-        .card-img-wrap:hover:after {
-          opacity: 1;
-        }
-    </style>
+    
 </head>
 <body>
     <header class="site-header sticky-top py-1">
       <nav class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="py-2" href="#" aria-label="Product">
+        <a class="py-2" href="{% url 'home' %}" aria-label="Product">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                stroke-width="2" class="d-block mx-auto" role="img" viewBox="0 0 24 24">
-              <title>Product</title>
+              <title>Konnov V.</title>
               <circle cx="12" cy="12" r="10"></circle>
               <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"></path>
           </svg>
@@ -66,9 +28,20 @@
         <a class="py-2 d-none d-md-inline-block" href="{% url 'about' %}">About</a>
         <a class="py-2 d-none d-md-inline-block" href="#">Photography</a>
         <a class="py-2 d-none d-md-inline-block" href="#">Subscribe</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Sign in</a>
+        <a class="py-2 d-none d-md-inline-block" href="{% url 'login' %}">Sign in</a>
       </nav>
     </header>
+
+    <div class='container'>      
+        {% if request.user.is_authenticated %}
+        <p style='text-align-last: right'>Hello, {{request.user}}!</p>
+        <div class="d-flex align-items-end justify-content-end">   
+          <a class="btn btn-outline-dark" href="{% url 'logout' %}">Logout</a>                  
+        </div>
+        {% endif %}      
+       
+      </div>
+    </div>
 
     <div class="container">
         {% block content %}{% endblock %}
@@ -78,10 +51,10 @@
     <div class="container">
 
       <div class="row">
-        {% for photo in all_photos %}
+        {% for photo in random_photos %}
         <div class="col-md-4 mb-2">
            <div class="card rounded-0" style="width: 19rem;">
-               <a href="photography/1">
+               <a href="{% url 'photography' photo.id %}">
                    <div class="img-text-container card-img-wrap">
                        <img class="card-img-top rounded-0 border border-secondry" src='{{photo.image.url}}' alt="Card image cap">
                        <div class="text-center bg-text inner">
@@ -89,10 +62,10 @@
                         </div>
                    </div>
                </a>
-            <div class="card-body">
+            <!--<div class="card-body">
               <h5 class="card-title">{{photo.name}}</h5>
               <p class="card-text">{{photo.description}}</p>
-            </div>
+            </div>-->
             <a href="#" class="btn btn-outline-dark btn-sm m-1">View</a>
          </div>
         </div>
