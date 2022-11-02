@@ -25,7 +25,8 @@
         <h4>Login for comment and rate photos</h4>        
           <div class="form-group mb-3">
             <label for="exampleInputEmail1">Username</label>
-            <input type="text" class="form-control" name=username id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">          
+            <input type="text" class="form-control" name=username id="exampleInputEmail1" 
+              aria-describedby="emailHelp" placeholder="Enter email">          
           </div>
           <div class="form-group mb-3">
             <label for="exampleInputPassword1">Password</label>
@@ -45,6 +46,10 @@
               {{field}}
             </div>
           {% endfor %}
+          <small id="passwordHelpBlock" class="form-text text-muted">
+          Your password must be 8-20 characters long, contain letters and numbers, 
+          and must not contain spaces, special characters, or emoji.
+          </small> <br> <br>
           <button type='submit' class='btn btn-primary btn-dark mb-3'>Submit</button> 
           <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
         </form>

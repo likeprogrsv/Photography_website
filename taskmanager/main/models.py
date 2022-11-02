@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
+from django.contrib.auth.models import User
 
 
 class Table_test(models.Model):
@@ -20,3 +21,16 @@ class Photos(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Comments(models.Model):
+    # user = models.ForeignKey(User,null=True,blank=True,on_delete=models.CASCADE)
+    photo = models.ForeignKey(Photos, related_name='comments', on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    body = models.TextField()
+    date_added = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self) -> str:
+        return f'Photo name: {self.photo.name}. Username: {self.name}'
+
+

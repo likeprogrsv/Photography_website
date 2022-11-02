@@ -11,11 +11,34 @@
 <body class="m-1">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col">
+            <div class="col text-center">
                 <a class="btn btn-dark my-3" href="{% url 'home' %}">Go Back</a>
                 <div style="height: 90vh">
                     <img style="max-width: 100%; max-height: 100%" src="{{photo.image.url}}" alt="photo">
-
+                </div>
+                <br>
+                <div>
+                    <h2>Comments:</h2>
+                    <hr>
+                    {% if not photo.comments.all %}
+                        <p>No comments yet...</p>
+                    {% else %}
+                    
+                        {% for comment in photo.comments.all%}
+                            <strong>
+                                {{comment.name}} - {{comment.date_added}}
+                            </strong>
+                                <br>
+                                {{comment.body}}                            
+                        {% endfor %}
+                    {% endif %}
+                    <hr>
+                    <form method='POST' class='form'>
+                        {% csrf_token %}
+                        <textarea class='form-control mb-3' name='user_comment' placeholder='Leave a comment...' ></textarea>
+                        <button type='submit' class='btn btn-primary btn-dark mb-3'>Submit</button>
+                    </form>
+                    
                 </div>
 
             </div>

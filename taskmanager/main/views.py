@@ -2,7 +2,7 @@ import imp
 from tkinter.messagebox import NO
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
-from .models import Photos
+from .models import Photos, Comments
 import random
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -68,3 +68,10 @@ def photography(request, photo_id):
         return render(request, 'main/photography.html', {'photo': photo})
     else:
         raise Http404('Photo does not exist')
+
+
+@login_required(login_url='login')
+def comment(request):
+    comments = Photos.comments.objects.get()
+    if request.method == 'POST':
+        comment = request.method.POST['user_comment']
