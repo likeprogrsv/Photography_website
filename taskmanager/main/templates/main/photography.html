@@ -18,31 +18,31 @@
                 </div>
                 <br>
                 <div>
-                    <h2>Comments:</h2>
+                    <h2>Comments:</h2>                        
                     <hr>
-                    {% if not photo.comments.all %}
+                    {% if not photo_comments %}
                         <p>No comments yet...</p>
                     {% else %}
                     
-                        {% for comment in photo.comments.all%}
+                        {% for comment in photo_comments %}
                             <strong>
-                                {{comment.name}} - {{comment.date_added}}
+                                {{comment.user.username}} - {{comment.date}}
                             </strong>
                                 <br>
-                                {{comment.body}}                            
+                                {{comment.content}}   
+                                <hr>                         
                         {% endfor %}
                     {% endif %}
                     <hr>
-                    <form method='POST' class='form'>
+                    <form method='POST' action='{% url "photography" photo.id %}' >
                         {% csrf_token %}
-                        <textarea class='form-control mb-3' name='user_comment' placeholder='Leave a comment...' ></textarea>
+                            <div class='form-group'>
+                                {{form}} 
+                            </div>
                         <button type='submit' class='btn btn-primary btn-dark mb-3'>Submit</button>
-                    </form>
-                    
+                    </form>                    
                 </div>
-
             </div>
-
         </div>
     </div>
 

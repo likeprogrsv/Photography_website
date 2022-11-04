@@ -2,11 +2,11 @@ import imp
 from tkinter.messagebox import NO
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
-from .models import Photos, Comments
+from .models import Photos, Comment
 import random
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, CommentForm
 # from django.contrib.auth.forms import UserCreationForm
 
 num_rand_photos = 6
@@ -64,14 +64,21 @@ def about(request):
 
 def photography(request, photo_id):
     photo = Photos.objects.get(pk=photo_id)
+    photo_comments = Comment.objects.all().filter(photo=photo.id)
+
+    form = CommentForm
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                form.instance.user = request.user
+                form.instance.photo = photo
+                form.save()
+            else: print('comment is invalid')
+        else: return redirect('login')
     if photo is not None:
-        return render(request, 'main/photography.html', {'photo': photo})
+        return render(request, 'main/photography.html', {'photo': photo, 'photo_comments': photo_comments, 'form': form})
     else:
         raise Http404('Photo does not exist')
 
-
-@login_required(login_url='login')
-def comment(request):
-    comments = Photos.comments.objects.get()
-    if request.method == 'POST':
-        comment = request.method.POST['user_comment']
+    

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Photos, Comments
+from .models import Photos, Comment
 # Register your models here.
 
 
@@ -8,4 +8,5 @@ class PhotosAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Photos, PhotosAdmin)
-admin.site.register(Comments)
+admin.site.register(Comment)
+
