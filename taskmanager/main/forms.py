@@ -20,8 +20,10 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 class CommentForm(forms.ModelForm):
-    content = forms.CharField(widget=forms.Textarea(attrs={
-        'rows': '4',
+    content = forms.CharField(label="", widget=forms.Textarea(attrs={
+        'rows': '3',
+        'class': 'form-control',
+        'placeholder': 'Leave a comment...'
     }))
 
     class Meta:

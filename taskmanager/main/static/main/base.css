@@ -1,6 +1,3 @@
-.container{
-  max-width: 960px;
-}
 
 .site-header {
   background-color: rgba(240, 240, 240, 0.85);
@@ -21,7 +18,7 @@
 }
 
 .card-img-top{
-  max-height: 220px;
+  max-height: 30vh;
   min-height: 150px;
   object-fit: cover;
 }
@@ -68,4 +65,7 @@ opacity: 1;
 }
 .form{
   width: 600px ;
+}
+.photo--background{
+  background-color: rgba(240, 240, 240, 0.85); 
 }

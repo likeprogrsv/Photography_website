@@ -28,7 +28,7 @@
         <a class="py-2 d-none d-md-inline-block" href="{% url 'about' %}">About</a>
         <a class="py-2 d-none d-md-inline-block" href="#">Photography</a>
         <a class="py-2 d-none d-md-inline-block" href="#">Subscribe</a>
-        <a class="py-2 d-none d-md-inline-block" href="{% url 'login' %}">Sign in</a>
+        <a class="py-2 d-md-inline-block" href="{% url 'login' %}">Sign in</a>
       </nav>
     </header>
 
@@ -48,12 +48,11 @@
     </div>
 
     <!-- grid of photos-->
-    <div class="container">
-
+    <div class="container" style="max-width: 80%">
       <div class="row">
         {% for photo in random_photos %}
         <div class="col-md-4 mb-2">
-           <div class="card rounded-0" style="width: 19rem;">
+           <div class="card rounded-0" style="width: auto;">
                <a href="{% url 'photography' photo.id %}">
                    <div class="img-text-container card-img-wrap">
                        <img class="card-img-top rounded-0 border border-secondry" src='{{photo.image.url}}' alt="Card image cap">
@@ -61,8 +60,7 @@
                           <p>{{photo.name}} </p>
                         </div>
                    </div>
-               </a>
-            {% comment %} <a href="#" class="btn btn-outline-dark btn-sm m-1">View</a> {% endcomment %}
+               </a>            
          </div>
         </div>
         {% endfor %}
