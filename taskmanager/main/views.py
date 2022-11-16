@@ -1,4 +1,4 @@
-import imp
+import imp, operator
 from tkinter.messagebox import NO
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
@@ -7,6 +7,7 @@ import random
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm, CommentForm
+from django.db.models import Func, F, Count
 # from django.contrib.auth.forms import UserCreationForm
 
 num_rand_photos = 6
@@ -54,6 +55,18 @@ def registerUser(request):
 def index(request):
     all_photos = Photos.objects.all()
     random_photos = random.sample(list(all_photos), num_rand_photos)
+    query_tags = Photos.objects.annotate(tag=Func(F('category'), function='unnest')).values('tag', 'id').order_by('tag').annotate(count=Count('id')).values('id', 'tag', 'count')   
+    tags={}    
+    for tag in query_tags:
+        if tag['tag'] in tags:
+            tags[tag['tag']]['ids'].append(tag['id'])
+            tags[tag['tag']]['count'] += 1 
+        else:
+            tags[tag['tag']] = {'ids': [tag['id']], 'count': tag['count']}        
+    
+    # make sorted dict by counts???
+    # tags = dict(sorted(tags.items(), key=operator.itemgetter(1), reverse=True))    
+        
     context = {'all_photos': all_photos, 'random_photos': random_photos}
     return render(request, 'main/index.html', context)
 
