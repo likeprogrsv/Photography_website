@@ -54,7 +54,17 @@ def registerUser(request):
 
 def index(request):
     all_photos = Photos.objects.all()
-    random_photos = random.sample(list(all_photos), num_rand_photos)
+    random_photos = random.sample(list(all_photos), num_rand_photos)        
+    context = {'all_photos': all_photos, 'random_photos': random_photos}
+    return render(request, 'main/index.html', context)
+
+@login_required(login_url='login')
+def about(request):
+    return render(request, 'main/about.html')
+
+
+def photos(request):
+    #photos = Photos.objects.all()
     query_tags = Photos.objects.annotate(tag=Func(F('category'), function='unnest')).values('tag', 'id').order_by('tag').annotate(count=Count('id')).values('id', 'tag', 'count')   
     tags={}    
     for tag in query_tags:
@@ -63,16 +73,17 @@ def index(request):
             tags[tag['tag']]['count'] += 1 
         else:
             tags[tag['tag']] = {'ids': [tag['id']], 'count': tag['count']}        
-    
+    tag_counts = {t: tags[t]['count'] for t in tags}
     # make sorted dict by counts???
     # tags = dict(sorted(tags.items(), key=operator.itemgetter(1), reverse=True))    
-        
-    context = {'all_photos': all_photos, 'random_photos': random_photos}
-    return render(request, 'main/index.html', context)
+    curr_tag = request.GET.get('curr_tag')
+    if curr_tag is None:
+        photos = Photos.objects.all()
+    else:
+        photos = Photos.objects.filter(pk__in=tags[curr_tag]['ids'])    
 
-@login_required(login_url='login')
-def about(request):
-    return render(request, 'main/about.html')
+    context = {'photos': photos, 'tags': tag_counts}
+    return render(request, 'main/photos.html', context)
 
 
 def photography(request, photo_id):

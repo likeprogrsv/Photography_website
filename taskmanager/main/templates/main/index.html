@@ -1,10 +1,39 @@
 {% extends 'main/base.html' %}
 
-{% block title %}
+{% comment %} {% block title %}
 Home
-{% endblock%}
+{% endblock%} {% endcomment %}
 
 {% block content %}    
-    <h1>Home</h1>
-    <p>Some text</p>
+    <div class='container'>      
+        {% if request.user.is_authenticated %}
+        <p style='text-align-last: right'>Hello, {{request.user}}!</p>
+        <div class="d-flex align-items-end justify-content-end">   
+            <a class="btn btn-outline-dark" href="{% url 'logout' %}">Logout</a>                  
+        </div>
+        {% endif %}    
+
+        <h1>Home</h1>
+        <p>Some text</p>            
+    </div>
+
+    <!-- grid of photos-->
+    <div class="container" style="max-width: 80%">
+      <div class="row">
+        {% for photo in random_photos %}
+        <div class="col-md-4 mb-2">
+           <div class="card rounded-0" style="width: auto;">
+               <a href="{% url 'photography' photo.id %}">
+                   <div class="img-text-container card-img-wrap">
+                       <img class="card-img-top rounded-0 border border-secondry" src='{{photo.image.url}}' alt="Card image cap">
+                       <div class="text-center bg-text inner">
+                          <p>{{photo.name}} </p>
+                        </div>
+                   </div>
+               </a>            
+         </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
 {% endblock %}

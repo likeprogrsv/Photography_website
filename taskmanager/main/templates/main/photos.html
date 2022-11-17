@@ -1,0 +1,33 @@
+{% extends 'main/base.html' %}
+
+
+{% block content %}
+    <h1>Photos</h1>
+    <div class="container", style="max-width: 80%" >            
+        <a class="btn btn-dark btn-lg mb-2" role="button" href="{% url 'photos' %}">All</a>                
+        {% for tag, count in tags.items %} 
+            {% if count > 2 %}       
+                <a class="btn btn-dark btn-sm mb-2" role="button" href="{% url 'photos' %}?curr_tag={{tag}}">{{tag}}</a>            
+            {% elif count == 2 %}
+                <a class="btn btn-secondary btn-sm mb-2" role="button" href="{% url 'photos' %}?curr_tag={{tag}}">{{tag}}</a> 
+            {% elif count < 2 %}
+                <a class="btn btn-outline-secondary btn-sm mb-2" role="button" href="{% url 'photos' %}?curr_tag={{tag}}">{{tag}}</a>
+            {% endif %}          
+        {% endfor%}                   
+    </div>
+    <div class='container' style='max-width: 80%'>
+        <div class='row'>
+            {% for photo in photos %}
+            <div class='col-md-4 mb-2'>
+                <div class='card rounded-0' style='width: auto'>
+                    <a href="{% url 'photography' photo.id %}">
+                        <div class='img-text-container card-img-wrap'>
+                            <img class='card-img-top rounded-0' src="{{ photo.image.url }}" alt="Photo">
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
