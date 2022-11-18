@@ -15,10 +15,13 @@
 </head>
 <body>
   <div class='container'>
+      <div class="row">
+        <div class="col-4 text-left">
+          <a class="btn btn-outline-dark my-3" href="{% url 'home' %}">Home page</a>
+        </div>
+      </div>  
     <div class='login--wrapper'>
-
       {% if page == 'login' %}
-
       <form method='POST' class='form'>
         {% csrf_token %}
         <h1 class='mb-3'><u>Login</u></h1>

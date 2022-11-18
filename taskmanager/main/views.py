@@ -65,7 +65,8 @@ def about(request):
 
 def photos(request):
     #photos = Photos.objects.all()
-    query_tags = Photos.objects.annotate(tag=Func(F('category'), function='unnest')).values('tag', 'id').order_by('tag').annotate(count=Count('id')).values('id', 'tag', 'count')   
+    query_tags = Photos.objects.annotate(tag=Func(F('category'), function='unnest'))\
+        .values('tag', 'id').order_by('tag').annotate(count=Count('id')).values('id', 'tag', 'count')   
     tags={}    
     for tag in query_tags:
         if tag['tag'] in tags:

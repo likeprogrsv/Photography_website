@@ -15,7 +15,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-4 text-left">
-                <a class="btn btn-dark my-3" href="{% url 'home' %}">Go Back</a>
+                <a class="btn btn-dark my-3" href="{{request.META.HTTP_REFERER}}">Go Back</a>
             </div>
             
         </div>
