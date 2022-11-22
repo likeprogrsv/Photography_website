@@ -1,8 +1,8 @@
 {% extends 'main/base.html' %}
 
 
-{% block content %}
-    <h1>Photos</h1>
+{% block content %}    
+    <div class="bottom--divider"></div>
     <div class="container", style="max-width: 80%" >            
         <a class="btn btn-dark btn-lg mb-2" role="button" href="{% url 'photos' %}">All</a>                
         {% for tag, count in tags.items %} 

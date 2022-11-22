@@ -10,9 +10,7 @@ class PhotosModelTest(TestCase):
         image="C:\Storage\Programming\PythonProjects\Photography_website\taskmanager\files\photos\IMG_3349.jpg",
         category=['grass', 'green', 'nature'], description="Testing image description", year_photo="2022", rating="0")
         
-        # for photo in Photos.objects.all():
-        #     Photos.objects.create(photo)
-
+        
     def test_name_label(self):
         image = Photos.objects.get(id=1)
         field_label = image._meta.get_field('name').verbose_name
