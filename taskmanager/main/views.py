@@ -10,7 +10,7 @@ from .forms import CustomUserCreationForm, CommentForm
 from django.db.models import Func, F, Count
 # from django.contrib.auth.forms import UserCreationForm
 
-num_rand_photos = 6
+# num_rand_photos = 1
 
 
 def loginUser(request):
@@ -52,7 +52,7 @@ def registerUser(request):
     return render(request, 'main/login_register.html', context)
 
 
-def index(request):
+def index(request, num_rand_photos=6):
     all_photos = Photos.objects.all()
     random_photos = random.sample(list(all_photos), num_rand_photos)        
     context = {'all_photos': all_photos, 'random_photos': random_photos}
@@ -99,6 +99,7 @@ def photography(request, photo_id):
                 form.instance.user = request.user
                 form.instance.photo = photo
                 form.save()
+                return redirect('photos')
             else: print('comment is invalid')
         else: return redirect('login')
     if photo is not None:
