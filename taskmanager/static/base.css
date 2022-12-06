@@ -1,0 +1,81 @@
+
+.site-header {
+  background-color: rgba(240, 240, 240, 0.85);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+}
+.site-header a {
+  color: rgb(105, 105, 105);
+  transition: color .15s ease-in-out;
+}
+.site-header a:hover{
+  color: rgb(0, 0, 0);
+  
+}
+
+a {
+  /* color: var(--bs-link-color); */
+  text-decoration: none;
+}
+
+.py-2{
+  padding-top: .5rem!important;
+  padding-bottom: .5rem!important;
+}
+
+.card-img-top{
+  max-height: 30vh;
+  min-height: 150px;
+  object-fit: cover;
+}
+.img-text-container {
+  position: relative;
+}
+
+.inner {
+  position: absolute;
+  top: 100%;
+  transform: translate(0%, -70%);
+  background-color: rgba(255,255,255,0.2);
+  color: rgb(255, 255, 255);
+  padding: 10px;
+}
+.card-img-wrap {
+  overflow: hidden;
+  position: relative;
+}
+.card-img-wrap:after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(255,255,255,0.3);
+  opacity: 0;
+  transition: opacity .25s;
+}
+.card-img-wrap img {
+  transition: transform .25s;
+  width: 100%;
+}
+.card-img-wrap:hover img {
+  transform: scale(1.2);
+}
+.card-img-wrap:hover:after {
+  opacity: 1;
+}
+
+.login--wrapper{
+  display: flex;
+  height: 80vh;
+  align-items: center;
+  justify-content: center;
+}
+.form{
+  width: 600px ;
+}
+.photo--background{
+  background-color: rgba(240, 240, 240, 0.85); 
+}
+.bottom--divider {
+  height: 3rem;  
+  border-width: 1px 0;
+}

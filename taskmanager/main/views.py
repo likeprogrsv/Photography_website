@@ -1,5 +1,3 @@
-import imp, operator
-from tkinter.messagebox import NO
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
 from .models import Photos, Comment
@@ -52,7 +50,7 @@ def registerUser(request):
     return render(request, 'main/login_register.html', context)
 
 
-def index(request, num_rand_photos=6):
+def index(request, num_rand_photos=1):
     all_photos = Photos.objects.all()
     random_photos = random.sample(list(all_photos), num_rand_photos)        
     context = {'all_photos': all_photos, 'random_photos': random_photos}
