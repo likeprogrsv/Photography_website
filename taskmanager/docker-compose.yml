@@ -14,7 +14,7 @@ services:
       - ./:/app
       - ./data/web:/vol/web
     environment:
-      - SECRET_KEY=djangodevsecretkey
+      - SECRET_KEY=${SECRET_KEY}
       - DEBUG=1
       - DB_HOST=db
       - DB_NAME=db_konnovv_website
