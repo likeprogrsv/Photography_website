@@ -79,3 +79,6 @@ a {
   height: 3rem;  
   border-width: 1px 0;
 }
+.font-weight-bold {
+  font-weight: 700!important;
+}
