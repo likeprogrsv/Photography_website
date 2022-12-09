@@ -1,9 +1,9 @@
 {% extends 'main/base.html' %}
 {% load static %}
 
-{% comment %} {% block title %}
-Home
-{% endblock%} {% endcomment %}
+{% block title %}
+Vadim Konnov Photography
+{% endblock%}
 
 {% block content %}    
     <div class='container'>      
@@ -29,9 +29,9 @@ Home
                <a href="{% url 'photography' photo.id %}">
                    <div class="img-text-container card-img-wrap">
                        <img class="card-img-top rounded-0 border border-secondry" src='{{photo.image.url}}' alt="Card image cap">
-                       <div class="text-center bg-text inner">
-                          <p>{{photo.name}} </p>
-                        </div>
+                       <!--<div class="text-center bg-text inner">-->
+                       <!--  <p>{{photo.name}} </p>-->
+                       <!--</div>-->
                    </div>
                </a>            
          </div>
