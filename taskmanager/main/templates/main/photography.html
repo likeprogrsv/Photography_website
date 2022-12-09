@@ -41,7 +41,7 @@
                         {% for comment in photo_comments %}
                             <strong> {{comment.user.username}} </strong> - {{comment.date}}                            
                                 <br>
-                                {{comment.content}}   
+                                &nbsp;&nbsp;{{comment.content}}   
                                 <hr>                         
                         {% endfor %}
                     {% endif %}

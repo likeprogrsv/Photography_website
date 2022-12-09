@@ -59,7 +59,7 @@ def index(request, num_rand_photos=6):
     context = {'all_photos': all_photos, 'random_photos': random_photos}
     return render(request, 'main/index.html', context)
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 def about(request):
     return render(request, 'main/about.html')
 
