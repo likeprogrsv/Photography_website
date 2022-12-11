@@ -1,17 +1,20 @@
 {% extends 'main/base.html' %}
 
+{% block title %}
+Vadim Konnov Photography - Photos
+{% endblock%}
 
 {% block content %}    
     <div class="bottom--divider"></div>
     <div class="container", style="max-width: 80%" >            
         <a class="btn btn-dark btn-lg mb-2" role="button" href="{% url 'photos' %}">All</a>                
         {% for tag, count in tags.items %} 
-            {% if count > 2 %}       
-                <a class="btn btn-dark btn-sm mb-2" role="button" href="{% url 'photos' %}?curr_tag={{tag}}">{{tag}}</a>            
-            {% elif count == 2 %}
-                <a class="btn btn-secondary btn-sm mb-2" role="button" href="{% url 'photos' %}?curr_tag={{tag}}">{{tag}}</a> 
-            {% elif count < 2 %}
+            {% if count > top_layer %}       
+                <a class="btn btn-dark btn-sm mb-2" role="button" href="{% url 'photos' %}?curr_tag={{tag}}">{{tag}}</a>                        
+            {% elif count <= bottom_layer %}
                 <a class="btn btn-outline-secondary btn-sm mb-2" role="button" href="{% url 'photos' %}?curr_tag={{tag}}">{{tag}}</a>
+            {% else %}
+                <a class="btn btn-secondary btn-sm mb-2" role="button" href="{% url 'photos' %}?curr_tag={{tag}}">{{tag}}</a>
             {% endif %}          
         {% endfor%}                   
     </div>

@@ -1,12 +1,76 @@
 {% extends 'main/base.html' %}
+{% load static %}
 
 {% block title %}
-About
+Vadim Konnov Photography - About
 {% endblock%}
 
-{% block content %}
-    <h1>About</h1>
-    <p>Photographer info</p>
+{% block content %}    
+    <div class="container-fluid">    
+        <div class="row" style="padding-top: 10px"><br></div>    
+        <div class="row">   
+            <div class="col">               
+                <div style="height: 90vh">
+                    <img style="max-width: 100%; max-height: 100%; border: 1px solid; border-color: rgba(210, 210, 210, 0.85)" 
+                    src="{% static 'my_photo.jpg' %}" alt="photo">
+                </div>                
+            </div>        
+
+            <div class="col-6">                              
+                <div>
+                    <p class="text-justify">
+                        Hi! I'm Vadim and i was interested to make my own photography website. 
+                        I prefer landscape photography and astrophotography most of all. 
+                        I visited a small number of countries and tried to make interesting shots in each of them.
+                        You can view my photos in the "Photography" tab.
+                    </p>
+                    <p class="text-uppercase font-weight-bold mb-0">My gear:</p>
+                    <br>
+                    <p class="text-uppercase mb-1">Camera</p>
+                    <p class="text-left"> - Canon EOS 1300D</p>
+                    <p class="text-uppercase mb-1">Lenses</p>
+                    <p class="text-left mb-0"> - Canon EF-S 24mm f/2.8 STM</p>
+                    <p class="text-left mb-0"> - Canon EF 50mm f/1.8 STM</p>
+                    <p class="text-left mb-0"> - Canon EF 70-300mm f/4-5.6 IS USM</p>
+                    <p class="text-left"> - Tokina AF 11-16/2.8</p>
+                    <p class="text-uppercase mb-1">Tripod</p>
+                    <p class="text-left"> - Benro T-880EX</p>
+                    <p class="text-uppercase mb-1">Accessories</p>
+                    <p class="text-left mb-0"> - Andoer TB81X Tripod Head Ball</p>
+                    <p class="text-left mb-0"> - JINTU Remote Control Timer Shutter Release Cord</p>
+                    <p class="text-left mb-0"> - Handmade astrotracker</p>    
+                    <p class="text-left"> - Filters: CPL, ND</p>
+                    <p class="text-left">
+                        You can also check my 
+                        <a class="site-header" style=" background-color: rgb(93 91 91 / 85%); color: white" 
+                        target="_blank" rel="noopener noreferrer" href="https://github.com/likeprogrsv">Github</a>
+                        account where I posted the website project code.
+                    </p>
+                    <p class="text-left">
+                        Other links:  
+                        <a class="site-header" style=" background-color: rgb(93 91 91 / 85%); color: white" 
+                        target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/vadim-konnov-64ba2191">LinkedIn</a>,
+                        <a class="site-header" style=" background-color: rgb(93 91 91 / 85%); color: white" 
+                        target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/konnovadim/">Instagram</a>.
+                        
+                    </p>
+                    <p class="text-left mb-0">If you'd like to contact me, please send me an email to:</p>
+                    <p class="text-left">konnovadim (at) gmail (Dot) com</p>
+                </div>
+            </div>
+
+            <div class='col'>
+                <div class="mb-2">
+                    <img style="max-width: 100%; max-height: 100%" 
+                    src="{% static 'camera.png' %}" alt="photo">
+                </div>
+                <div>
+                    <img style="max-width: 100%; max-height: 100%" 
+                    src="{% static 'tripod.png' %}" alt="photo">
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 

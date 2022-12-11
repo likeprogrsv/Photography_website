@@ -1,15 +1,15 @@
 {% extends 'main/base.html' %}
 {% load static %}
 
-{% comment %} {% block title %}
-Home
-{% endblock%} {% endcomment %}
+{% block title %}
+Vadim Konnov Photography
+{% endblock%}
 
 {% block content %}    
     <div class='container'>      
         {% if request.user.is_authenticated %}
         
-        <div class="d-flex align-items-end justify-content-end">
+        <div class="d-flex align-items-end justify-content-end mt-1">
           <div class="d-flex p-2">Hello,&nbsp<strong>{{request.user}}</strong>!</div>   
           <a class="btn btn-outline-dark" href="{% url 'logout' %}">Logout</a>                  
         </div>
@@ -29,9 +29,9 @@ Home
                <a href="{% url 'photography' photo.id %}">
                    <div class="img-text-container card-img-wrap">
                        <img class="card-img-top rounded-0 border border-secondry" src='{{photo.image.url}}' alt="Card image cap">
-                       <div class="text-center bg-text inner">
-                          <p>{{photo.name}} </p>
-                        </div>
+                       <!--<div class="text-center bg-text inner">-->
+                       <!--  <p>{{photo.name}} </p>-->
+                       <!--</div>-->
                    </div>
                </a>            
          </div>

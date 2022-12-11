@@ -1,5 +1,3 @@
-import imp, operator
-from tkinter.messagebox import NO
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
 from .models import Photos, Comment
@@ -54,17 +52,19 @@ def registerUser(request):
 
 def index(request, num_rand_photos=6):
     all_photos = Photos.objects.all()
-    random_photos = random.sample(list(all_photos), num_rand_photos)        
+    if all_photos.count() >= num_rand_photos:
+        random_photos = random.sample(list(all_photos), num_rand_photos)        
+    else: 
+        random_photos = random.sample(list(all_photos), all_photos.count())
     context = {'all_photos': all_photos, 'random_photos': random_photos}
     return render(request, 'main/index.html', context)
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 def about(request):
     return render(request, 'main/about.html')
 
 
-def photos(request):
-    #photos = Photos.objects.all()
+def photos(request):    
     query_tags = Photos.objects.annotate(tag=Func(F('category'), function='unnest'))\
         .values('tag', 'id').order_by('tag').annotate(count=Count('id')).values('id', 'tag', 'count')   
     tags={}    
@@ -75,15 +75,22 @@ def photos(request):
         else:
             tags[tag['tag']] = {'ids': [tag['id']], 'count': tag['count']}        
     tag_counts = {t: tags[t]['count'] for t in tags}
-    # make sorted dict by counts???
-    # tags = dict(sorted(tags.items(), key=operator.itemgetter(1), reverse=True))    
+    
+    """ Make sections for 3 types of tags """
+    bottom_layer, top_layer = 0, 0    
+    if len(tag_counts) > 0:       
+        tag_count_max = tag_counts[max(tag_counts, key=tag_counts.get)]
+        tag_count_min = tag_counts[min(tag_counts, key=tag_counts.get)]
+        bottom_layer = tag_count_min + (( tag_count_max - tag_count_min) * 0.33)
+        top_layer = tag_count_min + (( tag_count_max - tag_count_min) * 0.66)
+
     curr_tag = request.GET.get('curr_tag')
     if curr_tag is None:
         photos = Photos.objects.all()
     else:
         photos = Photos.objects.filter(pk__in=tags[curr_tag]['ids'])    
 
-    context = {'photos': photos, 'tags': tag_counts}
+    context = {'photos': photos, 'tags': tag_counts, 'bottom_layer': bottom_layer, 'top_layer': top_layer}
     return render(request, 'main/photos.html', context)
 
 
