@@ -9,4 +9,3 @@ class PhotosAdmin(admin.ModelAdmin):
 
 admin.site.register(Photos, PhotosAdmin)
 admin.site.register(Comment)
-

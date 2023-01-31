@@ -1,16 +1,22 @@
 from django.test import TestCase
 from main.models import Photos
 
+
 class PhotosModelTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        #Set up non-modified objects used by all test methods
-        Photos.objects.create(name="Grass - Testing image name", 
-        image="C:\Storage\Programming\PythonProjects\Photography_website\taskmanager\files\photos\IMG_3349.jpg",
-        category=['grass', 'green', 'nature'], description="Testing image description", year_photo="2022", rating="0")
-        
-        
+        # Set up non-modified objects used by all test methods
+        Photos.objects.create(
+            name="Grass - Testing image name",
+            image=(r'C:\Storage\Programming\PythonProject'
+                   r'\Photography_website\taskmanager\files'
+                   r'\photos\IMG_3349.jpg'),
+            category=['grass', 'green', 'nature'],
+            description="Testing image description",
+            year_photo="2022",
+            rating="0")
+
     def test_name_label(self):
         image = Photos.objects.get(id=1)
         field_label = image._meta.get_field('name').verbose_name
@@ -25,7 +31,7 @@ class PhotosModelTest(TestCase):
         image = Photos.objects.get(id=1)
         field_label = image._meta.get_field('category').verbose_name
         self.assertEquals(field_label, 'category')
-    
+
     def test_description_label(self):
         image = Photos.objects.get(id=1)
         field_label = image._meta.get_field('description').verbose_name
@@ -45,12 +51,12 @@ class PhotosModelTest(TestCase):
         image = Photos.objects.get(id=1)
         expected_name = image.name
         self.assertEquals(expected_name, str(image))
-    
+
     def test_name_maxlength(self):
         image = Photos.objects.get(id=1)
         field_label = image._meta.get_field('name').max_length
         self.assertEquals(field_label, 200)
-    
+
     def test_rating_value(self):
         image = Photos.objects.get(id=1)
         field_label = image.rating

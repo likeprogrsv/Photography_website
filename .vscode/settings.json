@@ -2,5 +2,7 @@
     "json.schemas": [
     
     ],
-    "python.defaultInterpreterPath": "C:/Storage/Programming/PythonProjects/Photography_website/.venv/Scripts"
+    "python.defaultInterpreterPath": "C:/Storage/Programming/PythonProjects/Photography_website/.venv/Scripts",
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": true
 }
